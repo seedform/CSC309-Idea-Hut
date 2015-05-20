@@ -1,0 +1,70 @@
+<div class="panel container-fluid color2a">
+  <hr>
+  <div class="container">
+    <h1 class="text-large"><%= idea.title %></h1>
+    <p>
+      Posted by
+      <a href="/?username=<%= idea.creator %>"><%= idea.creator %></a>
+      in
+      <a href="/?category=<%= idea.category %>"><%= idea.category %></a>
+      on
+      <%= idea.createdAt.toLocaleString() %>
+    </p>
+  </div>
+  <hr>
+</div>
+
+<div class="panel container-fluid uniform-padding">
+  <div class="container">
+    <br>
+    <% idea.description.split('\n').forEach(function(paragraph, index) { %>
+      <p class="text-medium text-justify invisible-tail-bottom"><%= paragraph %></p>
+    <% }) %>
+  </div>
+  <hr>
+  <div class="container">
+      <b>Tags:</b>
+      <% idea.tags.forEach(function(tag, index) { %>
+        <a href="/?tags=<%= tag %>" class="label label-success"><%= tag %></a>
+      <% }) %>
+  </div>
+  <hr>
+</div>
+
+<div class="bottom-right-container">
+  <% if (session.authenticated) { %>
+    <div id="dislike" class="circle-button circle-button-dislike"></div>
+    <div id="like" class="circle-button circle-button-like"></div>
+    <span id="score" class="vert-align"><%= idea.score %></span>
+  <% } else { %>
+    <div class="vert-align">Score: <%= idea.score %> (Sign in to rate!)</div>
+  <% } %>
+  
+</div>
+
+<div id="ideaId" style="display:none;"><%= idea.id %></div>
+
+<script>
+function rate(url) {
+  $.ajax({
+    url: url,
+    type: 'GET',
+    dataType: 'json',
+    success: function (data, status, jqXHR) {
+      if (data.result != undefined) { // could be zero
+        $('#score').text(data.result);
+      }
+    }
+  });
+}
+
+window.onload = function () {
+  $('#like').click(function(){
+    rate('/idea/like?like=yes&id=' + $('#ideaId').text());
+  });
+
+  $('#dislike').click(function(){
+    rate('/idea/like?like=no&id=' + $('#ideaId').text());
+  });
+}
+</script>

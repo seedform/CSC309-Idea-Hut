@@ -1,0 +1,101 @@
+<div class="panel container-fluid color2a">
+  <hr>
+  <div class="container">
+    <h1 class="text-large">Idea Hut&#8482;</h1>
+    <p class="text-medium">Your source for discovering and sharing the world's best startup ideas!</p>
+    <% if (!req.session.authenticated) { %>Sign in or register today to post and rate ideas!<% } %>
+  </div>
+  <hr>
+</div>
+
+<div class="panel container-fluid uniform-padding color2a">
+  <div class="container">
+    <form id="search" action="/">
+      <div class="row">
+            
+        <div class="col-xs-6 col-md-3 uniform-padding color2a">
+          <label>Search by keyword</label> 
+          <input type="text" class="form-control" placeholder="Tags" name="tags" value="<%= query.tags ? query.tags : '' %>">
+        </div>
+
+        <div class="col-xs-6 col-md-3 uniform-padding color2a">
+          <label>Search by user</label>
+          <input type="text" class="form-control" placeholder="Username" name="username" value="<%= query.creator ? query.creator : '' %>">
+        </div>
+
+        <div class="col-xs-6 col-md-3 uniform-padding color2a">
+          <label>Search by category</label>
+          <select class="form-control" form="search" name="category">
+            <option value="">All</option>
+            <% _.each(categories, function(category) { %>
+              <option value="<%= category.title %>" <%= query.category == category.title ? 'selected' : '' %>><%= category.title %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="col-xs-6 col-md-3 uniform-padding color2a">
+          <input type="radio" name="order" value="popular" <%= !query.byname && !query.newest ? 'checked' : ''%>> <label>Popular</label>
+          <input type="radio" name="order" value="newest" <%= query.newest ? 'checked' : ''%>> <label>Newest</label>
+          <input type="radio" name="order" value="byname" <%= query.byname ? 'checked' : ''%>> <label>By title</label>
+          <br>
+          <input type="submit" class="btn btn-success btn-block" value="Search">
+        </div>
+      </div>
+    </form>
+    <div class="text-center text-medium">
+      <% if (!ideas.length) { %>
+        Sorry, but I couldn't find any ideas with the given criteria :(
+      <% } else { %>
+        Showing you the
+        <% if (query.newest) { %>newest<% } else { %>most popular<% } %>
+        startup ideas
+        <% if (query.creator) { %>by <%= query.creator %><% } %>
+        <% if (query.category) { %>in <%= query.category %><% } %>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<div class="panel container-fluid uniform-padding">
+  <div class="container">
+    <div class="row">
+      
+      <% ideas.forEach(function (idea, index) { %>
+        <div class="col-xs-12 col-md-6 uniform-padding">
+          <a id="idea-card" href="/idea/open?id=<%= idea.id %>" class="btn btn-default color2">
+            <div class="uniform-padding">
+              <div id="idea-card-content">
+                
+                <div class="text-right">
+                  <b><%= idea.title %></b>
+                </div>
+                
+                <hr class="dark">
+
+                <div class="row">
+                  <div class="col-md-8 text-left hidden-xs hidden-sm">
+                    <div id="idea-card-details" class="uniform-margin">Posted by <%= idea.creator %> in <%= idea.category %></div>
+                  </div>
+                  <div class="col-xs-12 col-md-4 text-right">
+                    <div class="uniform-margin">
+                      Popularity: <span <%- idea.score < 0 ? 'style="color:red;"' : '' %>><%= idea.score %></span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </a>
+        </div>
+      <% }) %>
+      
+    </div>
+  </div>
+</div>
+
+
+<% if (req.session.authenticated) { %> 
+  <a href="/idea/open" class="bottom-right-container" title="Post a new startup idea!">
+    <div class="circle-button circle-button-new"></div>
+  </a>
+<% }%>

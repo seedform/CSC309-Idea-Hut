@@ -1,0 +1,191 @@
+/**********
+  ENTITIES
+***********/
+
+hr.light {
+  border:0;
+  height:1px;
+  background-image:        linear-gradient(left, rgba(0,0,0,0.1), rgba(250,250,250, 1), rgba(0,0,0,0.1));
+  background-image:   -moz-linear-gradient(left, rgba(0,0,0,0.1), rgba(250,250,250, 1), rgba(0,0,0,0.1));
+  background-image:    -ms-linear-gradient(left, rgba(0,0,0,0.1), rgba(250,250,250, 1), rgba(0,0,0,0.1));
+  background-image:     -o-linear-gradient(left, rgba(0,0,0,0.1), rgba(250,250,250, 1), rgba(0,0,0,0.1));
+  background-image:-webkit-linear-gradient(left, rgba(0,0,0,0.1), rgba(250,250,250, 1), rgba(0,0,0,0.1));
+}
+
+hr.dark {
+  border:0;
+  height:1px;
+  background-image:        linear-gradient(left, rgba(0,0,0,0.1), rgba(150,150,150, 1), rgba(0,0,0,0.1));
+  background-image:   -moz-linear-gradient(left, rgba(0,0,0,0.1), rgba(150,150,150, 1), rgba(0,0,0,0.1));
+  background-image:    -ms-linear-gradient(left, rgba(0,0,0,0.1), rgba(150,150,150, 1), rgba(0,0,0,0.1));
+  background-image:     -o-linear-gradient(left, rgba(0,0,0,0.1), rgba(150,150,150, 1), rgba(0,0,0,0.1));
+  background-image:-webkit-linear-gradient(left, rgba(0,0,0,0.1), rgba(150,150,150, 1), rgba(0,0,0,0.1));
+}
+
+.circle-button {
+  height: 60px;
+  width: 60px;
+  margin-left: 10px;
+  float: right;
+  display: inline-block;
+  vertical-align: middle;
+  background-size: auto 100%;
+
+  &-new {
+    background-image: url(/images/buttons/icons.png);
+    background-position: 0px 0px;
+    &:hover,
+    &:active {
+      background-image: url(/images/buttons/icons.png);
+      background-position: -60px 0px;
+    }
+  }
+
+  &-like {
+    background-image: url(/images/buttons/icons.png);
+    background-position: -120px 0px;
+    &:hover,
+    &:active {
+      background-image: url(/images/buttons/icons.png);
+      background-position: -180px 0px;
+    }
+  }
+
+  &-dislike {
+    background-image: url(/images/buttons/icons.png);
+    background-position: -240px 0px;
+    &:hover,
+    &:active {
+      background-image: url(/images/buttons/icons.png);
+      background-position: -300px 0px;
+    }
+  }
+
+}
+
+.help-tooltip {
+  cursor:help;
+  &:hover {
+    text-decoration:none;
+  }
+}
+
+/***********
+  OVERRIDES
+************/
+.row .well {
+  height: 200px;
+}
+
+.navbar {
+  margin-bottom: 0px;
+  color: white;
+  background-color: black;
+}
+
+.navbar-nav > li > a {
+  color: #ddd;
+}
+
+.navbar-brand:active,
+.navbar-brand:hover,
+.navbar-nav > li > a:active,
+.navbar-nav > li > a:hover {
+  background-color: #333;
+  color: white;
+}
+
+* {
+  border-radius: 0 !important;
+}
+
+.panel {
+  margin: 0px;
+  min-height: 100%;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+}
+
+/******************
+  CUSTOM PLACEMENT
+******************/
+.small-container{
+  max-width:450px;
+  display:block;
+  margin:auto;
+}
+
+.uniform-padding {
+  padding: 10px;
+}
+
+.uniform-margin {
+  margin: 10px;
+}
+
+.notif-container {
+  top: 0; 
+  right: 0; 
+  left: 0;
+  position: fixed;
+  z-index: 9999;
+}
+
+.bottom-right-container {
+  position: fixed;
+  display: inline-block;
+  bottom: 20px;
+  right: 20px;
+}
+
+.vert-align {
+  float: none;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.bottom-right-container > .vert-align {
+  float: right;
+  line-height: 60px;
+}
+
+.text {
+  &-large {
+    font-size: 300%;
+  }
+
+  &-medium {
+    font-size: 150%
+  }
+}
+
+.invisible-tail {
+  &-bottom {
+    padding-bottom: 5px;
+  }
+}
+
+/**********
+  SPECIFIC
+***********/
+#idea-card {
+  width: 100%;
+}
+
+#idea-card-content,
+#idea-card-details {
+  overflow: hidden;
+}
+
+#score {
+  font-size: 180%;
+  font-weight: bold;
+  color: white; 
+  text-shadow: black 0px 0px 10px
+}

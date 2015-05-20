@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Idea Hut&#8482;</title>
+
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="/favicon.png" />
+    <link href='http://fonts.googleapis.com/css?family=Electrolize' rel='stylesheet' type='text/css'>
+    <!--STYLES-->
+    <link rel="stylesheet" href="/styles/importer.css">
+    <!--STYLES END-->
+  </head>
+
+  <body>
+    
+    <!-- Fixed navbar start -->
+    <nav class="navbar navbar-static-top">
+      <div class="container-fluid">
+
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Idea Hut&#8482;</a>
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navops">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+        </div>
+  
+        <div id="navops" class="navbar-collapse collapse">
+          <% if (!session.authenticated) { %>
+            <form class="navbar-form navbar-right" action="/user/authenticate" method="POST">
+              <div class="form-group">
+                <input type="text" class="form-control" name="username" placeholder="Username" required pattern=".{3,10}" title="Your username must be at least three characeters long and 10 characters at most."/>
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Password" required pattern=".{8,}" title="Your password must be at least eight characeters long."/>
+              </div>
+              <div class="btn-group form-group">
+                <input type="submit" class="color2c btn btn-default" name="signIn" value="Sign In"/>
+                <input type="submit" class="color2a btn btn-default" name="register" value="Register"/>
+              </div>
+            </form>
+          <% } else { %>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/">Popular Ideas</a></li>
+            <li><a href="/?newest=yes">Newest Ideas</a></li>
+            <li><a href="/?username=<%= session.user.username %>" ><%= session.user.username %></a></li>
+            <li><a href="/user/deauthenticate">Sign out</a></li>
+          </ul>
+          <% }%>
+        </div>
+
+      </div>
+    </nav>
+    <!-- Fixed navbar end -->
+
+    <div class="notif-container">
+      <!-- Flash info messages -->
+      <% msg = req.flash('success') %>
+      <% if (msg != '') { %>
+        <div id="success-alert" class="alert alert-success fade in out alert-dismissible text-center" role="alert">
+          <span id="success-alert-message"><%- msg %></span>
+        </div>
+      <% } %>
+
+      <!-- Flash warning messages -->
+      <% msg = req.flash('error') %>
+      <% if (msg != '') { %>
+        <div id="error-alert" class="alert alert-error fade in out alert-dismissible text-center" role="alert">
+          <span id="error-alert-message"><%- msg %></span>
+        </div>
+      <% } %>
+    </div>
+
+    <%- body %>
+
+    <footer class="panel container-fluid color1b">
+      <div class="small-container uniform-padding">
+        <div class="text-center">&copy; 2015 Idea Hut&#8482;</div>
+      </div>
+    </footer>
+
+    <!--TEMPLATES-->
+    
+    <!--TEMPLATES END-->
+
+    <!--SCRIPTS-->
+    <script src="/js/dependencies/sails.io.js"></script>
+    <script src="/js/dependencies/jquery.min.js"></script>
+    <script src="/js/Chart.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/ideahut.js"></script>
+    <script src="/js/ie-emulation-modes-warning.js"></script>
+    <script src="/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="/js/npm.js"></script>
+    <!--SCRIPTS END-->
+  </body>
+</html>

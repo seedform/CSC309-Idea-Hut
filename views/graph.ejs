@@ -1,0 +1,53 @@
+<div class="panel container-fluid color1c">
+  <div class="container">
+    <h1>Distribution Graph</h1>
+  </div>
+  <hr>
+  <div class="container" style="max-height:100%">
+    <div class="panel color1 uniform-padding">
+      <div>
+        <canvas id="graph" style="height:100%; width:100%;"></canvas>
+      </div>
+    </div>
+  </div>
+  <hr>
+</div>
+
+<script>
+  buildGraph = function (data, status, jqXHR) {
+    chartData = {
+      labels: [],
+      datasets: [{
+        fillColor : "rgba(150,150,220,0.5)",
+        strokeColor : "rgba(150,150,220,0.8)",
+        highlightFill: "rgba(150,150,220,0.75)",
+        highlightStroke: "rgba(150,150,220,1)",
+        data : []
+      }]
+    };
+
+    params = {
+      scaleFontColor: '#000',
+      pointLabelFontColor: '#000',
+      responsive: true
+    };
+
+    var keys = Object.keys(data).sort();
+    for (var i = 0; i < keys.length; i++) {
+      chartData.labels.push(keys[i]);
+      chartData.datasets[0].data.push(data[keys[i]]);
+    }
+
+    var ctx = document.getElementById('graph').getContext('2d');
+    window.bargraph = new Chart(ctx).Bar(chartData, params);
+  };
+
+  window.onload = function () {
+    $.ajax({
+      url: '/api/distribution',
+      type: 'GET',
+      dataType: 'json',
+      success: buildGraph
+    });
+  };
+</script>
