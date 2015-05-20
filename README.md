@@ -45,7 +45,7 @@ Note: This project was built with Node.js v0.12.2 and Sails v0.11.
 
 2. Clone this repository and install additional modules (this project comes with `sails-mongo` to connecto to a MongoDB database):
   ```
-  # git clone https://github.com/seedform/IdeaHut.git
+  # git clone https://github.com/seedform/Idea-Hut.git
   # cd IdeaHut
   # npm install
   ```
