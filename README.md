@@ -43,11 +43,11 @@ Note: This project was built with Node.js v0.12.2 and Sails v0.11.
 1. Install Sails:  
   `# npm install -g sails`
 
-2. Clone this repository and install additional modules (this project comes with `sails-mongo` to connecto to a MongoDB database):
+2. Clone this repository and install additional modules. The `sails-mongo` adapter was used to connect to a MongoDB database. Note that a connection to any database other than MongoDB will require editing a few controller actions.
   ```
-  # git clone https://github.com/seedform/Idea-Hut.git
-  # cd Idea-Hut
-  # npm install
+  $ git clone https://github.com/seedform/Idea-Hut.git
+  $ cd Idea-Hut
+  $ npm install sails-mongo --save
   ```
 3. Configure your MongoDB connection in `config/connections.js`.
 4. Lift the server:  
